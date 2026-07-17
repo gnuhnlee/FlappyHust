@@ -6,17 +6,15 @@
 #include <touchgfx/hal/Types.hpp>
 #include <touchgfx/Bitmap.hpp>
 
-const uint16_t BITMAP_ALTERNATE_THEME_IMAGES_BACKGROUNDS_240X320_GRADIENT_DARK_ID = 0;
-const uint16_t BITMAP_ALTERNATE_THEME_IMAGES_CONTAINERS_LARGE_NARROW_DARK_ID = 1;
-const uint16_t BITMAP_BLUE_ICONS_HOME_32_ID = 2;
-const uint16_t BITMAP_LAMB_ID = 3;
-const uint16_t BITMAP_REDCAR_ID = 4;
-const uint16_t BITMAP_START_BUTTON_VECTOR_ID = 5;
-const uint16_t BITMAP_TRACK0_ID = 6;
-const uint16_t BITMAP_TRACK1_ID = 7;
-const uint16_t BITMAP_TRACK2_ID = 8;
-const uint16_t BITMAP_TRACK3_ID = 9;
-const uint16_t BITMAP_TRACK4_ID = 10;
+const uint16_t BITMAP_BACKGROUND_ID = 0;
+const uint16_t BITMAP_BLUE_ICONS_HOME_32_ID = 1;
+const uint16_t BITMAP_CHIM_MY_ID = 2;
+const uint16_t BITMAP_CHIM_NHUNG_ID = 3;
+const uint16_t BITMAP_COT_DUOI_ID = 4;
+const uint16_t BITMAP_COT_TREN_ID = 5;
+const uint16_t BITMAP_HOMESCREEN_ID = 6;
+const uint16_t BITMAP_REWARD_ID = 7;
+const uint16_t BITMAP_START_BUTTON_VECTOR_ID = 8;
 
 namespace BitmapDatabase
 {

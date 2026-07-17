@@ -1,0 +1,6 @@
+Application/User/generated/Font_MTCORSVA_TTF_40_4bpp_0.o: \
+ D:/TouchGFXProjects/FlappyHust/TouchGFX/generated/fonts/src/Font_MTCORSVA_TTF_40_4bpp_0.cpp \
+ ../../Middlewares/ST/touchgfx/framework/include/touchgfx/hal/Types.hpp \
+ ../../Middlewares/ST/touchgfx/framework/include/touchgfx/hal/Config.hpp
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/hal/Types.hpp:
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/hal/Config.hpp:

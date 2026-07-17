@@ -39,6 +39,10 @@ protected:
 	int gapSize;      // Độ rộng của khoảng trống (có thể thay đổi để tăng độ khó)
 	int bgX;
 
+	int coinX;
+	int coinY;
+	bool isCoinActive;
+
 };
 
 #endif // SCREEN2VIEW_HPP

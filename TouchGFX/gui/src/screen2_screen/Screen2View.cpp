@@ -1,5 +1,6 @@
 #include <gui/screen2_screen/Screen2View.hpp>
 #include <gui/common/FrontendApplication.hpp>
+#include <BitmapDatabase.hpp>
 #include <touchgfx/Unicode.hpp>
 
 #include "main.h"
@@ -9,30 +10,30 @@
 
 extern osMessageQueueId_t myQueue01Handle;
 
+uint32_t xorshift32(void) {
+    static uint32_t x = 314159265;
+
+    x ^= x << 13;
+    x ^= x >> 17;
+    x ^= x << 5;
+
+    return x;
+}
+
 Screen2View::Screen2View()
 {
-//	carX = 94;
-//	carY = 225;
-//    lambX = 94;
-//    lambY = -32;
-//    lamb_1X = 13;
-//    lamb_1Y = -200;
-//    trackY = 0;
-//    speed = 2;
-//    score = 0;
-//    highScore = 0;
-//    gameOver = false;
-//    endGameDelay = 0;
-
 	carX = 50;
 	carY = 160;
 	birdVelocity = 0;
 
-	pipeX = 240;        // Ống bắt đầu ngoài lề phải
-	gapY = 160;         // Tâm khoảng trống ở giữa màn hình
-	gapSize = 100;      // Độ rộng khe hở bay qua
+	pipeX = 320;
+	gapY = 160;
+	gapSize = 100;
 
-	// Kích thước ống: Cao 200, Rộng 30
+	coinX = pipeX + 175;
+	coinY = 160;
+	isCoinActive = true;
+
 	bgX = 0;
 	speed = 3;
 	score = 0;
@@ -45,16 +46,19 @@ Screen2View::Screen2View()
 void Screen2View::setupScreen()
 {
     Screen2ViewBase::setupScreen();
-//	localImageX = presenter->GetImageX();
-//    image1.setX(localImageX);
-//    lamb.setX(14);
-//    lamb.setY(0);
+
+    if (xorshift32() % 2 == 0) {
+
+		image1.setBitmap(touchgfx::Bitmap(BITMAP_CHIM_MY_ID));
+	} else {
+		image1.setBitmap(touchgfx::Bitmap(BITMAP_CHIM_NHUNG_ID));
+	}
 }
 
 void Screen2View::tearDownScreen()
 {
     Screen2ViewBase::tearDownScreen();
-//    presenter->UpdateImageX(localImageX);
+
 }
 
 void Screen2View::ExitFromScreen2(){
@@ -64,28 +68,29 @@ void Screen2View::ExitFromScreen2(){
 	carY = 160;
 	birdVelocity = 0;
 
-	pipeX = 240;
+	pipeX = 320;
 	gapY = 160;
-	gapSize = 100;
+	gapSize = 80;
+
+	coinX = pipeX + 175;
+	coinY = 160;
+	isCoinActive = true;
+	coin.setVisible(true);
 
 	bgX = 0;
 	speed = 3;
 	score = 0;
 	gameOver = false;
 
+	if (xorshift32() % 2 == 0) {
+		image1.setBitmap(touchgfx::Bitmap(BITMAP_CHIM_MY_ID));
+	} else {
+		image1.setBitmap(touchgfx::Bitmap(BITMAP_CHIM_NHUNG_ID));
+	}
+	image1.invalidate();
+
 	uint16_t control;
 	while(osMessageQueueGet(myQueue01Handle, &control, NULL, 0) == osOK){}
-}
-
-
-uint32_t xorshift32(void) {
-    static uint32_t x = 314159265;
-
-    x ^= x << 13;
-    x ^= x >> 17;
-    x ^= x << 5;
-
-    return x;
 }
 
 void Screen2View::handleTickEvent()
@@ -100,118 +105,15 @@ void Screen2View::handleTickEvent()
 	        return;
 	    }
 
-//	uint16_t control;
-//	if (osMessageQueueGet(myQueue01Handle, &control, NULL, 0) == osOK){
-//		if (control == 1) carX -= 3;
-//		if (control == 2) carX += 3;
-//	}
-//	if (carX < 0) carX = 0;
-//	if (carX > 190) carX = 190;
-//    image1.setXY(carX, carY);
-//
-//
-//	trackY += speed;
-//	if (trackY >= 320) trackY = 0;
-//
-//    track0.setY(trackY - 320);
-//    track1.setY(trackY);
-//    track2.setY(trackY - 640);
-//    track3.setY(trackY - 960);
-//    track4.setY(trackY - 1280);
-//
-//	int lane[4] = {13, 70, 129, 196};
-//    lambY += speed;
-//    if (lambY > 320){
-//		lambY = -32;
-//		lambX = lane[xorshift32() % 4];
-//		score++;
-//		speed = 4 + score / 10;
-//		if (score > gHighScore) gHighScore = score;
-//	}
-//    lamb.setXY(lambX, lambY);
-//
-//    lamb_1Y += speed;
-//	if (lamb_1Y > 320){
-//		lamb_1Y = -32; // Reset về đỉnh màn hình
-//		lamb_1X = lane[xorshift32() % 4];
-//		score++;
-//		speed = 4 + score / 10;
-//		if (score > gHighScore) gHighScore = score;
-//	}
-//   lamb_1.setXY(lamb_1X, lamb_1Y);
-//
-//   bool hitLamb = (image1.getX() < lamb.getX() + 32 &&
-//				   image1.getX() + 30 > lamb.getX() &&
-//				   image1.getY() < lamb.getY() + 32 &&
-//				   image1.getY() + 50 > lamb.getY());
-//
-//   bool hitLamb_1 = (image1.getX() < lamb_1.getX() + 32 &&
-//					 image1.getX() + 30 > lamb_1.getX() &&
-//					 image1.getY() < lamb_1.getY() + 32 &&
-//					 image1.getY() + 50 > lamb_1.getY());
-//
-//   if(hitLamb || hitLamb_1)
-//   {
-//	   gameOver = true;
-//	   endGameDelay = 0;
-//	   Unicode::snprintf(txtFinalScoreBuffer, TXTFINALSCORE_SIZE, "%d", score);
-//	   txtFinalScore.setVisible(true);
-//	   txtFinalScore.invalidate();
-//	   if(score > gHighScore) {
-//		   gHighScore = score;
-//
-//		   boxRecord.setVisible(true);
-//		   boxRecord.invalidate();
-//	   } else {
-//		   boxNormal.setVisible(true);
-//		   boxNormal.invalidate();
-//	   }
-//   }
-//    Unicode::snprintf(txtScoreBuffer, TXTSCORE_SIZE, "%d", score);
-//    txtScore.invalidate();
-//
-//
-//    image1.invalidate();
-//
-//    lamb.invalidate();
-//
-//    track0.invalidate();
-//    track1.invalidate();
-//    track2.invalidate();
-//    track3.invalidate();
-//    track4.invalidate();
+	    image1.invalidate();
+		pipeUpper.invalidate();
+		pipeLower.invalidate();
+		background1.invalidate();
+		background2.invalidate();
+		if (isCoinActive) {
+			coin.invalidate();
+		}
 
-//	tickCount++;
-//	switch (tickCount % 5)
-//	{
-//	case 0:
-//		track0.setVisible(true);
-//		track4.setVisible(false);
-//		break;
-//	case 1:
-//		track1.setVisible(true);
-//		track0.setVisible(false);
-//		break;
-//	case 2:
-//		track2.setVisible(true);
-//		track1.setVisible(false);
-//		break;
-//	case 3:
-//		track3.setVisible(true);
-//		track2.setVisible(false);
-//		break;
-//	case 4:
-//		track4.setVisible(true);
-//		track3.setVisible(false);
-//		break;
-//	default:
-//		break;
-//	}
-//
-//	lamb.setY(tickCount*2%320);
-//	lamb.setX(tickCount*2/320%4*60+15);
-//
-//	invalidate();
 	    uint16_t control;
 	        if (osMessageQueueGet(myQueue01Handle, &control, NULL, 0) == osOK){
 	            // Bất kỳ nút nào (control 1 hoặc 2) đều làm chim bay lên
@@ -239,33 +141,39 @@ void Screen2View::handleTickEvent()
 
 	        // 3. CUỘN HÌNH NỀN THEO CHIỀU NGANG
 	        bgX -= speed;
-	        if (bgX <= -320) bgX = 0; // Thay đổi tùy theo kích thước ảnh nền của bạn
+	        if (bgX <= -240) bgX = 0; // Thay đổi tùy theo kích thước ảnh nền của bạn
 
 	        // Cần đổi setY thành setX cho các ảnh nền nếu muốn cuộn ngang
 	        background1.setX(bgX);
-	        background2.setX(bgX + 320);
+	        background2.setX(bgX + 240);
 	        // (Tuỳ chỉnh khoảng cách cộng thêm tương ứng với độ rộng ảnh track)
 
 	        pipeX -= speed;
+			coinX -= speed;
 
-	            if (pipeX < -30){ // Ống rộng 30, khi đi qua mốc -30 là khuất hẳn màn hình
-	                pipeX = 240; // Đưa về lề phải
 
-	                // Random vị trí tâm khe hở (gapY).
-	                // Đảm bảo không sát lề quá (từ 80 đến 240)
-	                gapY = 80 + (xorshift32() % 160);
+	        if (pipeX < -30){
+				pipeX = 320;
 
-	                // Random luôn độ hở của ống (từ 90 đến 120) để tăng độ khó
-	                gapSize = 90 + (xorshift32() % 30);
+				gapY = 80 + (xorshift32() % 160);
+				gapSize = 90 + (xorshift32() % 30);
 
-	                score++;
-	                buzzer_state = BEEP_POINT;
+				score++;
 
-	                // Cứ mỗi 5 điểm tăng tốc độ game lên một chút
-	                if (score % 5 == 0 && speed < 8) speed++;
+				if (score % 5 == 0 && speed < 8) speed++;
+				if (score > gHighScore) gHighScore = score;
+			}
 
-	                if (score > gHighScore) gHighScore = score;
-	            }
+	        if (coinX < -32) {
+				// Đặt coin vào vị trí mới (giữa khoảng trống tiếp theo)
+				coinX = pipeX + 175;
+
+				// Random độ cao của coin để người chơi phải bay lên/xuống (từ Y=60 đến Y=240)
+				coinY = 60 + (xorshift32() % 180);
+
+				isCoinActive = true;
+				coin.setVisible(true);
+			}
 
 	            // Tính toán trục Y cho 2 ống dựa vào chiều cao 200px của ống
 	            int upperY = gapY - (gapSize / 2) - 200; // Ống trên bị đẩy lên trên
@@ -274,12 +182,19 @@ void Screen2View::handleTickEvent()
 	            pipeUpper.setXY(pipeX, upperY);
 	            pipeLower.setXY(pipeX, lowerY);
 
+	            if (isCoinActive) {
+					coin.setXY(coinX, coinY);
+				}
+
 	            // 5. XÉT VA CHẠM (COLLISION)
 	            // Giả định chim (image1) kích thước 30x50, Ống kích thước 30x200
-	            int birdWidth = 30;
-	            int birdHeight = 30;
+	            int birdWidth = 35;
+	            int birdHeight = 32;
 	            int pipeWidth = 30;
 	            int pipeHeight = 200;
+
+	            int coinWidth = 32;
+	            int coinHeight = 32;
 
 	            bool hitTopPipe = (image1.getX() < pipeUpper.getX() + pipeWidth &&
 	                               image1.getX() + birdWidth > pipeUpper.getX() &&
@@ -298,6 +213,20 @@ void Screen2View::handleTickEvent()
 	                //buzzer_state = BEEP_DEAD;
 	            }
 
+	            if (isCoinActive) {
+					bool hitCoin = (image1.getX() < coin.getX() + coinWidth &&
+									image1.getX() + birdWidth > coin.getX() &&
+									image1.getY() < coin.getY() + coinHeight &&
+									image1.getY() + birdHeight > coin.getY());
+
+					if (hitCoin) {
+						score += 4;               // Cộng 4 điểm khi ăn coin
+						isCoinActive = false;     // Tắt trạng thái hoạt động
+						coin.setVisible(false);   // Ẩn coin đi
+						if (score > gHighScore) gHighScore = score;
+					}
+				}
+
 	            // 6. XỬ LÝ GAME OVER UI
 	            if (gameOver) {
 	                endGameDelay = 0;
@@ -306,11 +235,11 @@ void Screen2View::handleTickEvent()
 	                txtFinalScore.invalidate();
 	                if(score >= gHighScore) {
 	                    gHighScore = score;
-	                    boxRecord.setVisible(true);
-	                    boxRecord.invalidate();
+	                    //boxRecord.setVisible(true);
+	                    //boxRecord.invalidate();
 	                } else {
-	                    boxNormal.setVisible(true);
-	                    boxNormal.invalidate();
+	                    //boxNormal.setVisible(true);
+	                    //boxNormal.invalidate();
 	                }
 	            }
 
@@ -321,6 +250,9 @@ void Screen2View::handleTickEvent()
 	            image1.invalidate();
 	            pipeUpper.invalidate();
 	            pipeLower.invalidate();
-	            //background1.invalidate();
-	            //background2.invalidate();
+	            background1.invalidate();
+	            background2.invalidate();
+	            if (isCoinActive) {
+					coin.invalidate();
+				}
 }

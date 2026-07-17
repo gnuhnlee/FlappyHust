@@ -11,7 +11,6 @@
 #include <touchgfx/widgets/Image.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
 #include <touchgfx/containers/buttons/Buttons.hpp>
-#include <touchgfx/widgets/ScalableImage.hpp>
 
 class Screen2ViewBase : public touchgfx::View<Screen2Presenter>
 {
@@ -37,23 +36,15 @@ protected:
      * Member Declarations
      */
     touchgfx::Box __background;
-    touchgfx::Image track4;
-    touchgfx::Image track3;
-    touchgfx::Image track2;
-    touchgfx::Image track1;
-    touchgfx::Image track0;
     touchgfx::Image background1;
     touchgfx::Image background2;
     touchgfx::TextAreaWithOneWildcard txtScore;
-    touchgfx::Image car;
     touchgfx::IconButtonStyle< touchgfx::ClickButtonTrigger >  flexButton1;
+    touchgfx::Image coin;
     touchgfx::Image image1;
-    touchgfx::Image lamb_1;
-    touchgfx::ScalableImage boxNormal;
-    touchgfx::ScalableImage boxRecord;
     touchgfx::TextAreaWithOneWildcard txtFinalScore;
-    touchgfx::Box pipeLower;
-    touchgfx::Box pipeUpper;
+    touchgfx::Image pipeUpper;
+    touchgfx::Image pipeLower;
 
     /*
      * Wildcard Buffers

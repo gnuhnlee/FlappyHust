@@ -13,37 +13,12 @@ Screen2ViewBase::Screen2ViewBase() :
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     add(__background);
 
-    track4.setXY(0, 0);
-    track4.setBitmap(touchgfx::Bitmap(BITMAP_TRACK1_ID));
-    track4.setVisible(false);
-    add(track4);
-
-    track3.setXY(0, 0);
-    track3.setBitmap(touchgfx::Bitmap(BITMAP_TRACK1_ID));
-    track3.setVisible(false);
-    add(track3);
-
-    track2.setXY(0, 0);
-    track2.setBitmap(touchgfx::Bitmap(BITMAP_TRACK1_ID));
-    track2.setVisible(false);
-    add(track2);
-
-    track1.setXY(0, 0);
-    track1.setBitmap(touchgfx::Bitmap(BITMAP_TRACK1_ID));
-    track1.setVisible(false);
-    add(track1);
-
-    track0.setXY(0, 0);
-    track0.setBitmap(touchgfx::Bitmap(BITMAP_TRACK1_ID));
-    track0.setVisible(false);
-    add(track0);
-
     background1.setXY(0, 0);
-    background1.setBitmap(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_BACKGROUNDS_240X320_GRADIENT_DARK_ID));
+    background1.setBitmap(touchgfx::Bitmap(BITMAP_BACKGROUND_ID));
     add(background1);
 
     background2.setXY(0, 0);
-    background2.setBitmap(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_BACKGROUNDS_240X320_GRADIENT_DARK_ID));
+    background2.setBitmap(touchgfx::Bitmap(BITMAP_BACKGROUND_ID));
     add(background2);
 
     txtScore.setPosition(53, 0, 159, 25);
@@ -54,37 +29,19 @@ Screen2ViewBase::Screen2ViewBase() :
     txtScore.setTypedText(touchgfx::TypedText(T___SINGLEUSE_6HL0));
     add(txtScore);
 
-    car.setXY(95, 186);
-    car.setBitmap(touchgfx::Bitmap(BITMAP_REDCAR_ID));
-    car.setVisible(false);
-    add(car);
-
     flexButton1.setIconBitmaps(Bitmap(BITMAP_BLUE_ICONS_HOME_32_ID), Bitmap(BITMAP_BLUE_ICONS_HOME_32_ID));
     flexButton1.setIconXY(0, 0);
     flexButton1.setAction(flexButtonCallback);
     flexButton1.setPosition(204, 282, 32, 32);
     add(flexButton1);
 
-    image1.setXY(196, 89);
-    image1.setBitmap(touchgfx::Bitmap(BITMAP_LAMB_ID));
+    coin.setXY(196, 89);
+    coin.setBitmap(touchgfx::Bitmap(BITMAP_REWARD_ID));
+    add(coin);
+
+    image1.setXY(21, 73);
+    image1.setBitmap(touchgfx::Bitmap(BITMAP_CHIM_MY_ID));
     add(image1);
-
-    lamb_1.setXY(21, 73);
-    lamb_1.setBitmap(touchgfx::Bitmap(BITMAP_LAMB_ID));
-    lamb_1.setVisible(false);
-    add(lamb_1);
-
-    boxNormal.setBitmap(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_CONTAINERS_LARGE_NARROW_DARK_ID));
-    boxNormal.setPosition(21, 105, 183, 116);
-    boxNormal.setScalingAlgorithm(touchgfx::ScalableImage::NEAREST_NEIGHBOR);
-    boxNormal.setVisible(false);
-    add(boxNormal);
-
-    boxRecord.setBitmap(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_CONTAINERS_LARGE_NARROW_DARK_ID));
-    boxRecord.setPosition(29, 105, 183, 116);
-    boxRecord.setScalingAlgorithm(touchgfx::ScalableImage::NEAREST_NEIGHBOR);
-    boxRecord.setVisible(false);
-    add(boxRecord);
 
     txtFinalScore.setXY(48, 121);
     txtFinalScore.setColor(touchgfx::Color::getColorFromRGB(252, 252, 252));
@@ -96,13 +53,13 @@ Screen2ViewBase::Screen2ViewBase() :
     txtFinalScore.setVisible(false);
     add(txtFinalScore);
 
-    pipeLower.setPosition(156, -88, 30, 200);
-    pipeLower.setColor(touchgfx::Color::getColorFromRGB(42, 171, 22));
-    add(pipeLower);
-
-    pipeUpper.setPosition(156, 182, 30, 200);
-    pipeUpper.setColor(touchgfx::Color::getColorFromRGB(42, 171, 22));
+    pipeUpper.setXY(132, -72);
+    pipeUpper.setBitmap(touchgfx::Bitmap(BITMAP_COT_TREN_ID));
     add(pipeUpper);
+
+    pipeLower.setXY(132, 182);
+    pipeLower.setBitmap(touchgfx::Bitmap(BITMAP_COT_DUOI_ID));
+    add(pipeLower);
 }
 
 Screen2ViewBase::~Screen2ViewBase()

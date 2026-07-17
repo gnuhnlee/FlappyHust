@@ -13,13 +13,17 @@ Screen1ViewBase::Screen1ViewBase() :
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     add(__background);
 
-    button1.setXY(20, 193);
+    image1.setXY(-11, -15);
+    image1.setBitmap(touchgfx::Bitmap(BITMAP_HOMESCREEN_ID));
+    add(image1);
+
+    button1.setXY(20, 237);
     button1.setBitmaps(touchgfx::Bitmap(BITMAP_START_BUTTON_VECTOR_ID), touchgfx::Bitmap(BITMAP_START_BUTTON_VECTOR_ID));
     button1.setAction(buttonCallback);
     add(button1);
 
     txtHighScore.setPosition(6, 9, 226, 28);
-    txtHighScore.setColor(touchgfx::Color::getColorFromRGB(255, 245, 245));
+    txtHighScore.setColor(touchgfx::Color::getColorFromRGB(5, 5, 5));
     txtHighScore.setLinespacing(0);
     Unicode::snprintf(txtHighScoreBuffer, TXTHIGHSCORE_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_FQI2).getText());
     txtHighScore.setWildcard(txtHighScoreBuffer);
