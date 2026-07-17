@@ -17,8 +17,8 @@ Screen1ViewBase::Screen1ViewBase() :
     image1.setBitmap(touchgfx::Bitmap(BITMAP_HOMESCREEN_ID));
     add(image1);
 
-    button1.setXY(20, 237);
-    button1.setBitmaps(touchgfx::Bitmap(BITMAP_START_BUTTON_VECTOR_ID), touchgfx::Bitmap(BITMAP_START_BUTTON_VECTOR_ID));
+    button1.setXY(19, 196);
+    button1.setBitmaps(touchgfx::Bitmap(BITMAP_START_BUTTON_ID), touchgfx::Bitmap(BITMAP_START_BUTTON_ID));
     button1.setAction(buttonCallback);
     add(button1);
 
@@ -29,6 +29,11 @@ Screen1ViewBase::Screen1ViewBase() :
     txtHighScore.setWildcard(txtHighScoreBuffer);
     txtHighScore.setTypedText(touchgfx::TypedText(T___SINGLEUSE_NFJO));
     add(txtHighScore);
+
+    button2.setXY(19, 116);
+    button2.setBitmaps(touchgfx::Bitmap(BITMAP_GUIDE_BUTTON_ID), touchgfx::Bitmap(BITMAP_GUIDE_BUTTON_ID));
+    button2.setAction(buttonCallback);
+    add(button2);
 }
 
 Screen1ViewBase::~Screen1ViewBase()
@@ -48,6 +53,13 @@ void Screen1ViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
         //Interaction2
         //When button1 clicked change screen to Screen2
         //Go to Screen2 with screen transition towards East
-        application().gotoScreen2ScreenCoverTransitionEast();
+        application().gotoScreen2ScreenSlideTransitionEast();
+    }
+    if (&src == &button2)
+    {
+        //Interaction3
+        //When button2 clicked change screen to Screen3
+        //Go to Screen3 with screen transition towards West
+        application().gotoScreen3ScreenSlideTransitionWest();
     }
 }

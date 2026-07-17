@@ -16,12 +16,12 @@
           {
             "Type": "Button",
             "Name": "button1",
-            "X": 20,
-            "Y": 237,
+            "X": 19,
+            "Y": 196,
             "Width": 200,
-            "Height": 83,
-            "Pressed": "Start-Button-Vector.png",
-            "Released": "Start-Button-Vector.png"
+            "Height": 139,
+            "Pressed": "start_button.png",
+            "Released": "start_button.png"
           },
           {
             "Type": "TextArea",
@@ -43,6 +43,16 @@
               "BufferSize": 64
             },
             "Fadeable": true
+          },
+          {
+            "Type": "Button",
+            "Name": "button2",
+            "X": 19,
+            "Y": 116,
+            "Width": 200,
+            "Height": 139,
+            "Pressed": "guide_button.png",
+            "Released": "guide_button.png"
           }
         ],
         "Interactions": [
@@ -54,15 +64,29 @@
             },
             "Action": {
               "Type": "ActionGotoScreen",
-              "ScreenTransitionType": "ScreenTransitionCover",
+              "ScreenTransitionType": "ScreenTransitionSlide",
               "ScreenTransitionDirection": "East",
               "ActionComponent": "Screen2"
+            }
+          },
+          {
+            "InteractionName": "Interaction3",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "button2"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "West",
+              "ActionComponent": "Screen3"
             }
           }
         ]
       },
       {
         "Name": "Screen2",
+        "CanvasBufferSize": 3600,
         "Components": [
           {
             "Type": "Image",
@@ -79,18 +103,11 @@
             "RelativeFilename": "background.png"
           },
           {
-            "Type": "TextArea",
-            "Name": "txtScore",
-            "X": 53,
-            "Width": 159,
-            "Height": 25,
-            "TextId": "__SingleUse_6HL0",
-            "TextRotation": "0",
-            "Wildcard1": {
-              "TextId": "__SingleUse_CL7G",
-              "UseBuffer": true,
-              "BufferSize": 64
-            }
+            "Type": "Image",
+            "Name": "imgCloud",
+            "Width": 50,
+            "Height": 35,
+            "RelativeFilename": "may_1.png"
           },
           {
             "Type": "FlexButton",
@@ -113,8 +130,8 @@
           {
             "Type": "Image",
             "Name": "coin",
-            "X": 196,
-            "Y": 89,
+            "X": 188,
+            "Y": 144,
             "Width": 32,
             "Height": 32,
             "RelativeFilename": "reward.png"
@@ -122,33 +139,11 @@
           {
             "Type": "Image",
             "Name": "image1",
-            "X": 21,
-            "Y": 73,
+            "X": 19,
+            "Y": 144,
             "Width": 34,
             "Height": 32,
             "RelativeFilename": "chim_my.png"
-          },
-          {
-            "Type": "TextArea",
-            "Name": "txtFinalScore",
-            "X": 48,
-            "Y": 121,
-            "Width": 137,
-            "Height": 50,
-            "Visible": false,
-            "TextId": "__SingleUse_DWQ6",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 252,
-              "Green": 252,
-              "Blue": 252
-            },
-            "AutoSize": true,
-            "Wildcard1": {
-              "TextId": "__SingleUse_PTKR",
-              "UseBuffer": true,
-              "BufferSize": 64
-            }
           },
           {
             "Type": "Image",
@@ -167,6 +162,92 @@
             "Width": 30,
             "Height": 200,
             "RelativeFilename": "cot_duoi.png"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "txtScore",
+            "X": 53,
+            "Width": 159,
+            "Height": 25,
+            "TextId": "__SingleUse_6HL0",
+            "TextRotation": "0",
+            "Wildcard1": {
+              "TextId": "__SingleUse_CL7G",
+              "UseBuffer": true,
+              "BufferSize": 64
+            }
+          },
+          {
+            "Type": "LineProgress",
+            "Name": "dashBar",
+            "X": 9,
+            "Y": 114,
+            "Width": 10,
+            "Height": 200,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "StartX": 5.0,
+            "StartY": 200.0,
+            "EndX": 5.0,
+            "LineWidth": 10.0,
+            "LineEndingStyle": "Round",
+            "FileNameBackground": "__generated\\alternate_theme_images_widgets_lineprogress_backgrounds_image_plain_normal_small_90.png",
+            "ProgressRangeMax": 100,
+            "ProgressInitialValue": 100
+          },
+          {
+            "Type": "Image",
+            "Name": "imgCountdown",
+            "X": 63,
+            "Y": 117,
+            "Width": 114,
+            "Height": 86,
+            "RelativeFilename": "count3.png"
+          },
+          {
+            "Type": "Image",
+            "Name": "imgDashing",
+            "X": 20,
+            "Y": 91,
+            "Width": 200,
+            "Height": 139,
+            "Visible": false,
+            "RelativeFilename": "dashing_1.png"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "txtFinalScore",
+            "X": 78,
+            "Y": 231,
+            "Width": 108,
+            "Height": 25,
+            "Visible": false,
+            "TextId": "__SingleUse_DWQ6",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 252,
+              "Green": 252,
+              "Blue": 252
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_PTKR",
+              "UseBuffer": true,
+              "BufferSize": 64
+            }
+          },
+          {
+            "Type": "Image",
+            "Name": "imgYouLose",
+            "X": 32,
+            "Y": 151,
+            "Width": 200,
+            "Height": 51,
+            "Visible": false,
+            "RelativeFilename": "you_lose.png"
           }
         ],
         "Interactions": [
@@ -193,6 +274,87 @@
             "Action": {
               "Type": "ActionCustom",
               "FunctionName": "ExitFromScreen2"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Screen3",
+        "Components": [
+          {
+            "Type": "Image",
+            "Name": "background",
+            "Width": 240,
+            "Height": 320,
+            "RelativeFilename": "guidance.png"
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "flexButton1",
+            "X": 204,
+            "Y": 282,
+            "Width": 32,
+            "Height": 32,
+            "ButtonTrigger": {
+              "Type": "TouchButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "IconButtonStyle",
+                "IconReleased": "__designer\\Blue_Icons_Home_32.png",
+                "IconPressed": "__designer\\Blue_Icons_Home_32.png"
+              }
+            ]
+          },
+          {
+            "Type": "Image",
+            "Name": "image1",
+            "X": 10,
+            "Y": 235,
+            "Width": 120,
+            "Height": 102,
+            "RelativeFilename": "may_3.png"
+          },
+          {
+            "Type": "Image",
+            "Name": "image2",
+            "X": 120,
+            "Y": 160,
+            "Width": 50,
+            "Height": 35,
+            "RelativeFilename": "may_1.png"
+          },
+          {
+            "Type": "Image",
+            "Name": "image3",
+            "X": 170,
+            "Y": 234,
+            "Width": 60,
+            "Height": 33,
+            "RelativeFilename": "may_2.png"
+          },
+          {
+            "Type": "Image",
+            "Name": "birdImg",
+            "X": 10,
+            "Y": 220,
+            "Width": 35,
+            "Height": 30,
+            "RelativeFilename": "chim_nhung.png"
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "flexButton1"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "East",
+              "ActionComponent": "Screen1"
             }
           }
         ]

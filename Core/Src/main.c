@@ -1215,9 +1215,9 @@ void StartDefaultTask(void *argument)
   {
 	  control = 0;
 	  if (HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_2) == GPIO_PIN_RESET)
-		  control = 1;
-	  if (HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_3) == GPIO_PIN_RESET)
 		  control = 2;
+	  if (HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_3) == GPIO_PIN_RESET)
+		  control = 1;
 
 	  if (control != 0)
 		  osMessageQueuePut(myQueue01Handle, &control, 0, 0);

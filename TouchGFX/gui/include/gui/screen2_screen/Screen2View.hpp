@@ -43,6 +43,17 @@ protected:
 	int coinY;
 	bool isCoinActive;
 
+	bool isDashing;
+	int dashPoints;          // Điểm tích luỹ (0 đến 8)
+	int dashTimer;           // Đếm ngược thời gian tăng tốc
+	const int MAX_DASH_TIME = 150;
+
+	int graceTimer;       // Đếm ngược thời gian bất tử sau khi hết Dash (30 frames ~ 0.5s)
+	int countdownTimer;
+
+	float cloudX;
+	int cloudY;
+
 };
 
 #endif // SCREEN2VIEW_HPP

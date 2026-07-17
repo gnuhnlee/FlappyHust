@@ -10,7 +10,7 @@
         <Translation Language="GB">0</Translation>
       </Text>
       <Text Id="__SingleUse_DWQ6" Alignment="Center" TypographyId="Default">
-        <Translation Language="GB">GameOver!!!&#10;Score &lt;value&gt;</Translation>
+        <Translation Language="GB">  Score &lt;value&gt;  </Translation>
       </Text>
       <Text Id="__SingleUse_FQI2" Alignment="Left" TypographyId="Default">
         <Translation Language="GB">0</Translation>

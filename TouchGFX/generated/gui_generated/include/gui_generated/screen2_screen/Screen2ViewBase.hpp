@@ -9,8 +9,10 @@
 #include <gui/screen2_screen/Screen2Presenter.hpp>
 #include <touchgfx/widgets/Box.hpp>
 #include <touchgfx/widgets/Image.hpp>
-#include <touchgfx/widgets/TextAreaWithWildcard.hpp>
 #include <touchgfx/containers/buttons/Buttons.hpp>
+#include <touchgfx/widgets/TextAreaWithWildcard.hpp>
+#include <touchgfx/containers/progress_indicators/LineProgress.hpp>
+#include <touchgfx/widgets/canvas/PainterRGB565.hpp>
 
 class Screen2ViewBase : public touchgfx::View<Screen2Presenter>
 {
@@ -38,13 +40,19 @@ protected:
     touchgfx::Box __background;
     touchgfx::Image background1;
     touchgfx::Image background2;
-    touchgfx::TextAreaWithOneWildcard txtScore;
+    touchgfx::Image imgCloud;
     touchgfx::IconButtonStyle< touchgfx::ClickButtonTrigger >  flexButton1;
     touchgfx::Image coin;
     touchgfx::Image image1;
-    touchgfx::TextAreaWithOneWildcard txtFinalScore;
     touchgfx::Image pipeUpper;
     touchgfx::Image pipeLower;
+    touchgfx::TextAreaWithOneWildcard txtScore;
+    touchgfx::LineProgress dashBar;
+    touchgfx::PainterRGB565 dashBarPainter;
+    touchgfx::Image imgCountdown;
+    touchgfx::Image imgDashing;
+    touchgfx::TextAreaWithOneWildcard txtFinalScore;
+    touchgfx::Image imgYouLose;
 
     /*
      * Wildcard Buffers
@@ -55,6 +63,12 @@ protected:
     touchgfx::Unicode::UnicodeChar txtFinalScoreBuffer[TXTFINALSCORE_SIZE];
 
 private:
+
+    /*
+     * Canvas Buffer Size
+     */
+    static const uint32_t CANVAS_BUFFER_SIZE = 3600;
+    uint8_t canvasBuffer[CANVAS_BUFFER_SIZE];
 
     /*
      * Callback Declarations

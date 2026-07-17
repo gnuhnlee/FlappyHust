@@ -6,15 +6,29 @@
 #include <touchgfx/hal/Types.hpp>
 #include <touchgfx/Bitmap.hpp>
 
-const uint16_t BITMAP_BACKGROUND_ID = 0;
-const uint16_t BITMAP_BLUE_ICONS_HOME_32_ID = 1;
-const uint16_t BITMAP_CHIM_MY_ID = 2;
-const uint16_t BITMAP_CHIM_NHUNG_ID = 3;
-const uint16_t BITMAP_COT_DUOI_ID = 4;
-const uint16_t BITMAP_COT_TREN_ID = 5;
-const uint16_t BITMAP_HOMESCREEN_ID = 6;
-const uint16_t BITMAP_REWARD_ID = 7;
-const uint16_t BITMAP_START_BUTTON_VECTOR_ID = 8;
+const uint16_t BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_LINEPROGRESS_BACKGROUNDS_IMAGE_PLAIN_NORMAL_SMALL_90_ID = 0;
+const uint16_t BITMAP_BACKGROUND_ID = 1;
+const uint16_t BITMAP_BLUE_ICONS_HOME_32_ID = 2;
+const uint16_t BITMAP_CHIM_MY_ID = 3;
+const uint16_t BITMAP_CHIM_NHUNG_ID = 4;
+const uint16_t BITMAP_COT_DUOI_ID = 5;
+const uint16_t BITMAP_COT_TREN_ID = 6;
+const uint16_t BITMAP_COUNT1_ID = 7;
+const uint16_t BITMAP_COUNT2_ID = 8;
+const uint16_t BITMAP_COUNT3_ID = 9;
+const uint16_t BITMAP_DASHING_1_ID = 10;
+const uint16_t BITMAP_DASHING_2_ID = 11;
+const uint16_t BITMAP_DASHING_3_ID = 12;
+const uint16_t BITMAP_GUIDANCE_ID = 13;
+const uint16_t BITMAP_GUIDE_BUTTON_ID = 14;
+const uint16_t BITMAP_HOMESCREEN_ID = 15;
+const uint16_t BITMAP_MAY_1_ID = 16;
+const uint16_t BITMAP_MAY_2_ID = 17;
+const uint16_t BITMAP_MAY_3_ID = 18;
+const uint16_t BITMAP_REWARD_ID = 19;
+const uint16_t BITMAP_START_ID = 20;
+const uint16_t BITMAP_START_BUTTON_ID = 21;
+const uint16_t BITMAP_YOU_LOSE_ID = 22;
 
 namespace BitmapDatabase
 {

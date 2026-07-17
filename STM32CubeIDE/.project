@@ -355,6 +355,16 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/screen2_screen/Screen2View.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/gui/Screen3Presenter.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/screen3_screen/Screen3Presenter.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/Screen3View.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/screen3_screen/Screen3View.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/ApplicationFontProvider.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/fonts/src/ApplicationFontProvider.cpp</locationURI>
@@ -455,6 +465,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/screen2_screen/Screen2ViewBase.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/Screen3ViewBase.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/screen3_screen/Screen3ViewBase.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/BitmapDatabase.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/BitmapDatabase.cpp</locationURI>
@@ -470,9 +485,9 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__designer/image_Blue_Icons_Home_32.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/generated/image_Start-Button-Vector.cpp</name>
+			<name>Application/User/generated/image_alternate_theme_images_widgets_lineprogress_backgrounds_image_plain_normal_small_90.cpp</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_Start-Button-Vector.cpp</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_lineprogress_backgrounds_image_plain_normal_small_90.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/image_background.cpp</name>
@@ -500,14 +515,84 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_cot_tren.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/image_count1.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_count1.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_count2.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_count2.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_count3.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_count3.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_dashing_1.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_dashing_1.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_dashing_2.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_dashing_2.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_dashing_3.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_dashing_3.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_guidance.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_guidance.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_guide_button.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_guide_button.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/image_homescreen.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_homescreen.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/image_may_1.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_may_1.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_may_2.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_may_2.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_may_3.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_may_3.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/image_reward.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_reward.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_start.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_start.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_start_button.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_start_button.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_you_lose.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_you_lose.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/LanguageGb.cpp</name>

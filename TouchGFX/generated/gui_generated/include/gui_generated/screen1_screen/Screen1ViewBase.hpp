@@ -33,6 +33,7 @@ protected:
     touchgfx::Image image1;
     touchgfx::Button button1;
     touchgfx::FadeAnimator< touchgfx::TextAreaWithOneWildcard > txtHighScore;
+    touchgfx::Button button2;
 
     /*
      * Wildcard Buffers
