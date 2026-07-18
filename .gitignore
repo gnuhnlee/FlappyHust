@@ -1,0 +1,39 @@
+# STM32CubeIDE local settings & logs
+.settings/
+*.launch
+*.jlink
+*.log
+
+# Build folders
+Debug/
+Release/
+
+# Executables & Binaries
+*.elf
+*.map
+*.bin
+*.hex
+*.srec
+*.lst
+*.o
+*.d
+*.a
+*.su
+*.crl
+
+# TouchGFX Build & Auto-generated files
+TouchGFX/generated/
+TouchGFX/build/
+
+# TouchGFX Simulator
+TouchGFX/simulator/msvs/.vs/
+TouchGFX/simulator/msvs/Debug/
+TouchGFX/simulator/msvs/Release/
+TouchGFX/simulator/msvs/bin/
+TouchGFX/simulator/msvs/build/
+TouchGFX/simulator/msvs/*.user
+
+# OS & Temporary files
+*.bak
+.DS_Store
+Thumbs.db
