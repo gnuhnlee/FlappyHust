@@ -11,49 +11,39 @@ public:
     virtual ~Screen2View() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
-    virtual void handleTickEvent() override;
-    virtual void ExitFromScreen2() override;
+    virtual void ExitFromScreen2();
+    virtual void handleTickEvent();
+
 protected:
-    int16_t localImageX;
-    uint32_t tickCount;
+    int birdX;
+    int birdY;
+    float birdVelocityY;
 
-    int carX;
-    int carY;
+    int scrollSpeed;
+    int backgroundX;
+    float cloudX;
+    int cloudY;
 
-    int lambX;
-    int lambY;
+    int pipeX;
+    int pipeGapY;
+    int pipeGapSize;
+    bool hasPassedPipe;
 
-    int lamb_1X;
-    int lamb_1Y;
-    int trackY;
+    int coinX;
+    int coinY;
+    bool isCoinActive;
 
-    int speed;
+    bool isDashing;
+    int dashEnergy;
+    int dashTimer;
+    const int MAX_DASH_TIME = 150;
+    int graceTimer;
+
     int score;
-    int highScore;
-    bool gameOver;
-    int endGameDelay;
-
-    float birdVelocity; // Quản lý vận tốc rơi/nhảy của chim
-    int pipeX;        // Trục X chung cho cả 2 ống
-	int gapY;         // Vị trí tâm của khoảng trống
-	int gapSize;      // Độ rộng của khoảng trống (có thể thay đổi để tăng độ khó)
-	int bgX;
-
-	int coinX;
-	int coinY;
-	bool isCoinActive;
-
-	bool isDashing;
-	int dashPoints;          // Điểm tích luỹ (0 đến 8)
-	int dashTimer;           // Đếm ngược thời gian tăng tốc
-	const int MAX_DASH_TIME = 150;
-
-	int graceTimer;       // Đếm ngược thời gian bất tử sau khi hết Dash (30 frames ~ 0.5s)
-	int countdownTimer;
-
-	float cloudX;
-	int cloudY;
-
+    bool isGameOver;
+    int gameOverTimer;
+    int countdownTimer;
+    int soundCooldown;
 };
 
-#endif // SCREEN2VIEW_HPP
+#endif

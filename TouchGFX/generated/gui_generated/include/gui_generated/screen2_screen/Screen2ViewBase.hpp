@@ -42,8 +42,8 @@ protected:
     touchgfx::Image background2;
     touchgfx::Image imgCloud;
     touchgfx::IconButtonStyle< touchgfx::ClickButtonTrigger >  flexButton1;
-    touchgfx::Image coin;
-    touchgfx::Image image1;
+    touchgfx::Image coinImg;
+    touchgfx::Image birdImg;
     touchgfx::Image pipeUpper;
     touchgfx::Image pipeLower;
     touchgfx::TextAreaWithOneWildcard txtScore;

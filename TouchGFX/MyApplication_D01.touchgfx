@@ -129,7 +129,7 @@
           },
           {
             "Type": "Image",
-            "Name": "coin",
+            "Name": "coinImg",
             "X": 188,
             "Y": 144,
             "Width": 32,
@@ -138,7 +138,7 @@
           },
           {
             "Type": "Image",
-            "Name": "image1",
+            "Name": "birdImg",
             "X": 19,
             "Y": 144,
             "Width": 34,

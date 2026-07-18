@@ -15,5 +15,5 @@ D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:1135:6:LCD_IO_WriteReg	8	static
 D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:1154:10:LCD_IO_ReadData	24	static
 D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:1181:6:LCD_Delay	0	static
 D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:1186:6:Buzzer_SetFrequency	0	static
-D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:1296:6:HAL_TIM_PeriodElapsedCallback	0	static
-D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:1314:6:Error_Handler	0	static
+D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:1310:6:HAL_TIM_PeriodElapsedCallback	0	static
+D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:1328:6:Error_Handler	0	static

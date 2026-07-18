@@ -34,13 +34,13 @@ Screen2ViewBase::Screen2ViewBase() :
     flexButton1.setPosition(204, 282, 32, 32);
     add(flexButton1);
 
-    coin.setXY(188, 144);
-    coin.setBitmap(touchgfx::Bitmap(BITMAP_REWARD_ID));
-    add(coin);
+    coinImg.setXY(188, 144);
+    coinImg.setBitmap(touchgfx::Bitmap(BITMAP_REWARD_ID));
+    add(coinImg);
 
-    image1.setXY(19, 144);
-    image1.setBitmap(touchgfx::Bitmap(BITMAP_CHIM_MY_ID));
-    add(image1);
+    birdImg.setXY(19, 144);
+    birdImg.setBitmap(touchgfx::Bitmap(BITMAP_CHIM_MY_ID));
+    add(birdImg);
 
     pipeUpper.setXY(132, -72);
     pipeUpper.setBitmap(touchgfx::Bitmap(BITMAP_COT_TREN_ID));

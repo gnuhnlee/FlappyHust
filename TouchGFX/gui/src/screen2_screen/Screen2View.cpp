@@ -20,44 +20,47 @@ uint32_t xorshift32(void) {
 
 Screen2View::Screen2View()
 {
-	carX = 50;
-	carY = 160;
-	birdVelocity = 0;
+    birdX = 50;
+    birdY = 160;
+    birdVelocityY = 0;
 
-	pipeX = 320;
-	gapY = 160;
-	gapSize = 100;
+    pipeX = 320;
+    pipeGapY = 160;
+    pipeGapSize = 100;
+    hasPassedPipe = false;
 
-	coinX = pipeX + 175;
-	coinY = 160;
-	isCoinActive = true;
+    coinX = pipeX + 175;
+    coinY = 160;
+    isCoinActive = true;
 
-	cloudX = 240;
-	cloudY = 20;
+    cloudX = 240;
+    cloudY = 20;
+    backgroundX = 0;
+    scrollSpeed = 3;
 
-	bgX = 0;
-	speed = 3;
-	score = 0;
-	highScore = 0;
-	gameOver = false;
-	endGameDelay = 0;
+    score = 0;
+    gHighScore = 0;
+    isGameOver = false;
+    gameOverTimer = 0;
+    countdownTimer = 240;
 
-	isDashing = false;
-	dashPoints = 0;
-	dashTimer = 0;
+    isDashing = false;
+    dashEnergy = 0;
+    dashTimer = 0;
+    graceTimer = 0;
 
-	graceTimer = 0;
-	countdownTimer = 240;
+    soundCooldown = 0;
+    buzzer_state = 0;
 }
 
 void Screen2View::setupScreen()
 {
     Screen2ViewBase::setupScreen();
 
-    image1.setVisible(false);
+    birdImg.setVisible(false);
     pipeUpper.setVisible(false);
     pipeLower.setVisible(false);
-    coin.setVisible(false);
+    coinImg.setVisible(false);
     dashBar.setVisible(false);
     txtScore.setVisible(false);
     imgDashing.setVisible(false);
@@ -65,17 +68,16 @@ void Screen2View::setupScreen()
     imgCloud.setVisible(false);
     imgCountdown.setVisible(true);
 
-
     int cloudType = xorshift32() % 3;
     if (cloudType == 0) imgCloud.setBitmap(touchgfx::Bitmap(BITMAP_MAY_1_ID));
     else if (cloudType == 1) imgCloud.setBitmap(touchgfx::Bitmap(BITMAP_MAY_2_ID));
     else imgCloud.setBitmap(touchgfx::Bitmap(BITMAP_MAY_3_ID));
 
     if (xorshift32() % 2 == 0) {
-		image1.setBitmap(touchgfx::Bitmap(BITMAP_CHIM_MY_ID));
-	} else {
-		image1.setBitmap(touchgfx::Bitmap(BITMAP_CHIM_NHUNG_ID));
-	}
+        birdImg.setBitmap(touchgfx::Bitmap(BITMAP_CHIM_MY_ID));
+    } else {
+        birdImg.setBitmap(touchgfx::Bitmap(BITMAP_CHIM_NHUNG_ID));
+    }
 }
 
 void Screen2View::tearDownScreen()
@@ -84,65 +86,73 @@ void Screen2View::tearDownScreen()
 }
 
 void Screen2View::ExitFromScreen2(){
-	if(score > gHighScore) gHighScore = score;
+    if(score > gHighScore) gHighScore = score;
 
-	carX = 50;
-	carY = 160;
-	birdVelocity = 0;
+    birdX = 50;
+    birdY = 160;
+    birdVelocityY = 0;
 
-	pipeX = 320;
-	gapY = 160;
-	gapSize = 80;
+    pipeX = 320;
+    pipeGapY = 160;
+    pipeGapSize = 80;
+    hasPassedPipe = false;
 
-	coinX = pipeX + 175;
-	coinY = 160;
-	isCoinActive = true;
+    coinX = pipeX + 175;
+    coinY = 160;
+    isCoinActive = true;
 
-	cloudX = 240;
-	cloudY = 20 + (xorshift32() % 60);
+    cloudX = 240;
+    cloudY = 20 + (xorshift32() % 60);
+    backgroundX = 0;
+    scrollSpeed = 3;
 
-	bgX = 0;
-	speed = 3;
-	score = 0;
-	gameOver = false;
+    score = 0;
+    isGameOver = false;
+    gameOverTimer = 0;
+    countdownTimer = 240;
 
-	isDashing = false;
-	dashPoints = 0;
-	dashTimer = 0;
+    isDashing = false;
+    dashEnergy = 0;
+    dashTimer = 0;
+    graceTimer = 0;
 
-	graceTimer = 0;
-	countdownTimer = 240;
+    soundCooldown = 0;
+    buzzer_state = 0;
 
-	imgCountdown.setVisible(true);
-	imgDashing.setVisible(false);
-	imgYouLose.setVisible(false);
-	pipeUpper.setVisible(false);
-	pipeLower.setVisible(false);
-	image1.setVisible(false);
-    coin.setVisible(false);
+    imgCountdown.setVisible(true);
+    imgDashing.setVisible(false);
+    imgYouLose.setVisible(false);
+    pipeUpper.setVisible(false);
+    pipeLower.setVisible(false);
+    birdImg.setVisible(false);
+    coinImg.setVisible(false);
     dashBar.setVisible(false);
     txtScore.setVisible(false);
     imgCloud.setVisible(false);
 
-	if (xorshift32() % 2 == 0) {
-		image1.setBitmap(touchgfx::Bitmap(BITMAP_CHIM_MY_ID));
-	} else {
-		image1.setBitmap(touchgfx::Bitmap(BITMAP_CHIM_NHUNG_ID));
-	}
+    if (xorshift32() % 2 == 0) {
+        birdImg.setBitmap(touchgfx::Bitmap(BITMAP_CHIM_MY_ID));
+    } else {
+        birdImg.setBitmap(touchgfx::Bitmap(BITMAP_CHIM_NHUNG_ID));
+    }
 
-	invalidate();
+    invalidate();
 
-	uint16_t control;
-	while(osMessageQueueGet(myQueue01Handle, &control, NULL, 0) == osOK){}
+    uint16_t control;
+    while(osMessageQueueGet(myQueue01Handle, &control, NULL, 0) == osOK){}
 }
 
 void Screen2View::handleTickEvent()
 {
-	Screen2ViewBase::handleTickEvent();
+    Screen2ViewBase::handleTickEvent();
 
-    if (gameOver){
-        endGameDelay++;
-        if (endGameDelay >= 180) {
+    if (soundCooldown > 0) {
+        soundCooldown--;
+    }
+
+    if (isGameOver){
+        gameOverTimer++;
+        if (gameOverTimer >= 180) {
             application().gotoScreen1ScreenNoTransition();
         }
         return;
@@ -151,9 +161,22 @@ void Screen2View::handleTickEvent()
     if (countdownTimer > 0) {
         countdownTimer--;
 
+        if (countdownTimer == 239 || countdownTimer == 179 || countdownTimer == 119) {
+            if (soundCooldown == 0) {
+                buzzer_state = BEEP_COUNTDOWN;
+                soundCooldown = 15;
+            }
+        }
+        else if (countdownTimer == 59) {
+            if (soundCooldown == 0) {
+                buzzer_state = BEEP_START;
+                soundCooldown = 15;
+            }
+        }
+
         uint16_t control;
         while(osMessageQueueGet(myQueue01Handle, &control, NULL, 0) == osOK){}
-n
+
         if (countdownTimer > 180) {
             imgCountdown.setBitmap(touchgfx::Bitmap(BITMAP_COUNT3_ID));
         } else if (countdownTimer > 120) {
@@ -165,15 +188,14 @@ n
         }
 
         imgCountdown.setWidth(touchgfx::Bitmap(imgCountdown.getBitmap()).getWidth());
-		imgCountdown.setHeight(touchgfx::Bitmap(imgCountdown.getBitmap()).getHeight());
+        imgCountdown.setHeight(touchgfx::Bitmap(imgCountdown.getBitmap()).getHeight());
 
-		int screenWidth = 240;
-		int screenHeight = 320;
+        int screenWidth = 240;
+        int screenHeight = 320;
+        int centeredX = (screenWidth - imgCountdown.getWidth()) / 2;
+        int centeredY = (screenHeight - imgCountdown.getHeight()) / 2;
 
-		int centeredX = (screenWidth - imgCountdown.getWidth()) / 2;
-		int centeredY = (screenHeight - imgCountdown.getHeight()) / 2;
-
-		imgCountdown.setXY(centeredX, centeredY);
+        imgCountdown.setXY(centeredX, centeredY);
 
         imgCountdown.invalidate();
         background1.invalidate();
@@ -181,21 +203,20 @@ n
         if (countdownTimer == 0) {
             imgCountdown.setVisible(false);
 
-            image1.setVisible(true);
+            birdImg.setVisible(true);
             pipeUpper.setVisible(true);
             pipeLower.setVisible(true);
-            if(isCoinActive) coin.setVisible(true);
+            if(isCoinActive) coinImg.setVisible(true);
             dashBar.setVisible(true);
             txtScore.setVisible(true);
             imgCloud.setVisible(true);
 
             invalidate();
         }
-
         return;
     }
 
-    image1.invalidate();
+    birdImg.invalidate();
     pipeUpper.invalidate();
     pipeLower.invalidate();
     background1.invalidate();
@@ -203,7 +224,7 @@ n
     imgCloud.invalidate();
     dashBar.invalidate();
     if (isCoinActive) {
-        coin.invalidate();
+        coinImg.invalidate();
     }
     imgDashing.invalidate();
 
@@ -211,55 +232,55 @@ n
     if (osMessageQueueGet(myQueue01Handle, &control, NULL, 0) == osOK){
         if (control == 1) {
             if (!isDashing) {
-                birdVelocity = -2.0f;
+                birdVelocityY = -2.0f;
             }
         }
         else if (control == 2) {
-            if (dashPoints >= 8 && !isDashing && graceTimer <= 0) {
+            if (dashEnergy >= 8 && !isDashing && graceTimer <= 0) {
                 isDashing = true;
                 dashTimer = MAX_DASH_TIME;
-                dashPoints = 0;
+                dashEnergy = 0;
 
                 int dashType = xorshift32() % 3;
-				if (dashType == 0) imgDashing.setBitmap(touchgfx::Bitmap(BITMAP_DASHING_1_ID));
-				else if (dashType == 1) imgDashing.setBitmap(touchgfx::Bitmap(BITMAP_DASHING_2_ID));
-				else imgDashing.setBitmap(touchgfx::Bitmap(BITMAP_DASHING_3_ID));
+                if (dashType == 0) imgDashing.setBitmap(touchgfx::Bitmap(BITMAP_DASHING_1_ID));
+                else if (dashType == 1) imgDashing.setBitmap(touchgfx::Bitmap(BITMAP_DASHING_2_ID));
+                else imgDashing.setBitmap(touchgfx::Bitmap(BITMAP_DASHING_3_ID));
 
-				imgDashing.setWidth(touchgfx::Bitmap(imgDashing.getBitmap()).getWidth());
-				int dashCenteredX = (240 - imgDashing.getWidth()) / 2;
-				imgDashing.setXY(dashCenteredX, 60);
-				imgDashing.setVisible(true);
+                imgDashing.setWidth(touchgfx::Bitmap(imgDashing.getBitmap()).getWidth());
+                int dashCenteredX = (240 - imgDashing.getWidth()) / 2;
+                imgDashing.setXY(dashCenteredX, 60);
+                imgDashing.setVisible(true);
             }
         }
     }
 
-
     if (isDashing) {
-        carY = 160;
-        birdVelocity = 0;
+        birdY = 160;
+        birdVelocityY = 0;
     } else {
-        birdVelocity += 0.1f;
-        carY += (int)birdVelocity;
+        birdVelocityY += 0.1f;
+        birdY += (int)birdVelocityY;
     }
 
-    if (carY < 0) {
-        carY = 0;
-        birdVelocity = 0;
+    if (birdY < 0) {
+        birdY = 0;
+        birdVelocityY = 0;
     }
 
-    if (carY > 280) {
+    if (birdY > 280) {
         if (graceTimer <= 0) {
-            gameOver = true;
+            isGameOver = true;
             buzzer_state = BEEP_DEAD;
+            soundCooldown = 180;
         } else {
-            carY = 280;
+            birdY = 280;
         }
     }
-    image1.setXY(carX, carY);
+    birdImg.setXY(birdX, birdY);
 
-    int currentSpeed = speed;
+    int currentScrollSpeed = scrollSpeed;
     if (isDashing) {
-        currentSpeed = 12;
+        currentScrollSpeed = 12;
         dashTimer--;
 
         int percent = (dashTimer * 100) / MAX_DASH_TIME;
@@ -268,7 +289,7 @@ n
         bool isBlink = (dashTimer % 10 < 5);
         pipeUpper.setVisible(isBlink);
         pipeLower.setVisible(isBlink);
-        coin.setVisible(isBlink);
+        coinImg.setVisible(isBlink);
 
         if (dashTimer <= 0) {
             isDashing = false;
@@ -277,81 +298,86 @@ n
             imgDashing.setVisible(false);
             pipeUpper.setVisible(true);
             pipeLower.setVisible(true);
-            coin.setVisible(isCoinActive);
+            coinImg.setVisible(isCoinActive);
         }
     }
     else if (graceTimer > 0) {
         graceTimer--;
-
-        image1.setVisible(graceTimer % 10 < 5);
+        birdImg.setVisible(graceTimer % 10 < 5);
 
         if (graceTimer <= 0) {
-            image1.setVisible(true);
+            birdImg.setVisible(true);
         }
-
         dashBar.setValue(0);
     }
     else {
-        int percent = (dashPoints * 100) / 8;
+        int percent = (dashEnergy * 100) / 8;
         if (percent > 100) percent = 100;
         dashBar.setValue(percent);
     }
 
-    bgX -= currentSpeed;
-    if (bgX <= -240) bgX = 0;
+    backgroundX -= currentScrollSpeed;
+    if (backgroundX <= -240) backgroundX = 0;
+    background1.setX(backgroundX);
+    background2.setX(backgroundX + 240);
 
-    background1.setX(bgX);
-    background2.setX(bgX + 240);
+    cloudX -= (currentScrollSpeed * 0.5f);
+    if (cloudX < -60) {
+        cloudX = 240;
+        cloudY = 10 + (xorshift32() % 100);
 
-    cloudX -= (currentSpeed * 0.5f);
-	if (cloudX < -60) {
-		cloudX = 240;
-		cloudY = 10 + (xorshift32() % 100);
+        int cloudType = xorshift32() % 3;
+        if (cloudType == 0) imgCloud.setBitmap(touchgfx::Bitmap(BITMAP_MAY_1_ID));
+        else if (cloudType == 1) imgCloud.setBitmap(touchgfx::Bitmap(BITMAP_MAY_2_ID));
+        else imgCloud.setBitmap(touchgfx::Bitmap(BITMAP_MAY_3_ID));
+    }
+    imgCloud.setXY((int)cloudX, cloudY);
 
-		int cloudType = xorshift32() % 3;
-		if (cloudType == 0) imgCloud.setBitmap(touchgfx::Bitmap(BITMAP_MAY_1_ID));
-		else if (cloudType == 1) imgCloud.setBitmap(touchgfx::Bitmap(BITMAP_MAY_2_ID));
-		else imgCloud.setBitmap(touchgfx::Bitmap(BITMAP_MAY_3_ID));
-	}
-	imgCloud.setXY((int)cloudX, cloudY);
-
-    pipeX -= currentSpeed;
-    coinX -= currentSpeed;
+    pipeX -= currentScrollSpeed;
+    coinX -= currentScrollSpeed;
 
     if (pipeX < -30){
         pipeX = 320;
-        gapY = 80 + (xorshift32() % 160);
-        gapSize = 90 + (xorshift32() % 30);
+        pipeGapY = 80 + (xorshift32() % 160);
+        pipeGapSize = 90 + (xorshift32() % 30);
+        hasPassedPipe = false;
+    }
+
+    if (!hasPassedPipe && pipeX < 20) {
+        hasPassedPipe = true;
 
         if (isDashing) {
             score += 2;
         } else {
             score += 1;
-            if (dashPoints < 8) dashPoints += 1;
+            if (soundCooldown == 0) {
+                buzzer_state = BEEP_POINT;
+                soundCooldown = 15;
+            }
+            if (dashEnergy < 8) dashEnergy += 1;
         }
 
-        if (score % 5 == 0 && speed < 8) speed++;
+        scrollSpeed = 3 + (score / 5);
+        if (scrollSpeed > 8) scrollSpeed = 8;
         if (score > gHighScore) gHighScore = score;
     }
 
     if (coinX < -32) {
         coinX = pipeX + 175;
         coinY = 60 + (xorshift32() % 180);
-
         isCoinActive = true;
-        coin.setVisible(true);
+        coinImg.setVisible(true);
     }
 
-    int upperY = gapY - (gapSize / 2) - 200;
-    int lowerY = gapY + (gapSize / 2);
+    int upperY = pipeGapY - (pipeGapSize / 2) - 200;
+    int lowerY = pipeGapY + (pipeGapSize / 2);
 
     pipeUpper.setXY(pipeX, upperY);
     pipeLower.setXY(pipeX, lowerY);
 
     if (isCoinActive) {
-        coin.setXY(coinX, coinY);
+        coinImg.setXY(coinX, coinY);
     }
-
 
     int birdWidth = 35;
     int birdHeight = 32;
@@ -360,47 +386,59 @@ n
     int coinWidth = 32;
     int coinHeight = 32;
 
-    bool hitTopPipe = (image1.getX() < pipeUpper.getX() + pipeWidth &&
-                       image1.getX() + birdWidth > pipeUpper.getX() &&
-                       image1.getY() < pipeUpper.getY() + pipeHeight &&
-                       image1.getY() + birdHeight > pipeUpper.getY());
+    bool hitTopPipe = (birdImg.getX() < pipeUpper.getX() + pipeWidth &&
+                       birdImg.getX() + birdWidth > pipeUpper.getX() &&
+                       birdImg.getY() < pipeUpper.getY() + pipeHeight &&
+                       birdImg.getY() + birdHeight > pipeUpper.getY());
 
-    bool hitBottomPipe = (image1.getX() < pipeLower.getX() + pipeWidth &&
-                          image1.getX() + birdWidth > pipeLower.getX() &&
-                          image1.getY() < pipeLower.getY() + pipeHeight &&
-                          image1.getY() + birdHeight > pipeLower.getY());
+    bool hitBottomPipe = (birdImg.getX() < pipeLower.getX() + pipeWidth &&
+                          birdImg.getX() + birdWidth > pipeLower.getX() &&
+                          birdImg.getY() < pipeLower.getY() + pipeHeight &&
+                          birdImg.getY() + birdHeight > pipeLower.getY());
 
-    if(!isDashing && graceTimer <= 0 && (hitTopPipe || hitBottomPipe))
-    {
+    if(!isDashing && graceTimer <= 0 && (hitTopPipe || hitBottomPipe)) {
+        isGameOver = true;
         buzzer_state = BEEP_DEAD;
-        gameOver = true;
+        soundCooldown = 180;
     }
 
     if (isCoinActive) {
-        bool hitCoin = (image1.getX() < coin.getX() + coinWidth &&
-                        image1.getX() + birdWidth > coin.getX() &&
-                        image1.getY() < coin.getY() + coinHeight &&
-                        image1.getY() + birdHeight > coin.getY());
+        bool hitCoin = (birdImg.getX() < coinImg.getX() + coinWidth &&
+                        birdImg.getX() + birdWidth > coinImg.getX() &&
+                        birdImg.getY() < coinImg.getY() + coinHeight &&
+                        birdImg.getY() + birdHeight > coinImg.getY());
 
         if (hitCoin) {
             score += 4;
-            if (!isDashing) {
-                dashPoints += 4;
-                if (dashPoints > 8) dashPoints = 8;
+
+            if (soundCooldown == 0) {
+                buzzer_state = BEEP_COIN;
+                soundCooldown = 15;
             }
+
+            if (!isDashing) {
+                dashEnergy += 4;
+                if (dashEnergy > 8) dashEnergy = 8;
+            }
+
             isCoinActive = false;
-            coin.setVisible(false);
+            coinImg.setVisible(false);
+
+            scrollSpeed = 3 + (score / 5);
+            if (scrollSpeed > 8) scrollSpeed = 8;
             if (score > gHighScore) gHighScore = score;
         }
     }
 
-    if (gameOver) {
-        endGameDelay = 0;
+    if (isGameOver) {
+        gameOverTimer = 0;
         Unicode::snprintf(txtFinalScoreBuffer, TXTFINALSCORE_SIZE, "%d", score);
         txtFinalScore.setVisible(true);
         txtFinalScore.invalidate();
+
         imgYouLose.setVisible(true);
         imgYouLose.invalidate();
+
         if(score >= gHighScore) {
             gHighScore = score;
         }
@@ -409,7 +447,7 @@ n
     Unicode::snprintf(txtScoreBuffer, TXTSCORE_SIZE, "%d", score);
     txtScore.invalidate();
 
-    image1.invalidate();
+    birdImg.invalidate();
     pipeUpper.invalidate();
     pipeLower.invalidate();
     background1.invalidate();
@@ -417,7 +455,8 @@ n
     imgCloud.invalidate();
     dashBar.invalidate();
     imgDashing.invalidate();
+
     if (isCoinActive) {
-        coin.invalidate();
+        coinImg.invalidate();
     }
 }

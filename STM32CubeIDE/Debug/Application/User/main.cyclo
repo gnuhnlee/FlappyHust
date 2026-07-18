@@ -1,6 +1,6 @@
 D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:1083:13:SPI5_Write	1
 D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:1209:6:StartDefaultTask	4
-D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:1237:6:StartBuzzerTask	4
+D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:1237:6:StartBuzzerTask	6
 D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:287:6:SystemClock_Config	1
 D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:183:5:main	1
 D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:927:6:IOE_Init	1
@@ -15,5 +15,5 @@ D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:1135:6:LCD_IO_WriteReg	1
 D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:1154:10:LCD_IO_ReadData	1
 D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:1181:6:LCD_Delay	1
 D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:1186:6:Buzzer_SetFrequency	1
-D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:1296:6:HAL_TIM_PeriodElapsedCallback	2
-D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:1314:6:Error_Handler	1
+D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:1310:6:HAL_TIM_PeriodElapsedCallback	2
+D:/TouchGFXProjects/FlappyHust/Core/Src/main.c:1328:6:Error_Handler	1

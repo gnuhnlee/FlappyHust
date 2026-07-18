@@ -1242,24 +1242,39 @@ void StartBuzzerTask(void *argument)
   {
 	  switch(buzzer_state)
 	  {
-		case BEEP_FLAP:
-		  // Tiếng bíp siêu ngắn khi vỗ cánh
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_SET);
-		  osDelay(100);
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_RESET);
-		  buzzer_state = BEEP_NONE; // Trở về trạng thái nghỉ
-		  break;
-
-		case BEEP_POINT:
-		  // Tiếng bíp dứt khoát khi qua ống
+		case BEEP_COUNTDOWN:
 		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_SET);
 		  osDelay(500);
 		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_RESET);
 		  buzzer_state = BEEP_NONE;
 		  break;
 
+		case BEEP_START:
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_SET);
+		  osDelay(750);
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_RESET);
+		  buzzer_state = BEEP_NONE;
+		  break;
+
+		case BEEP_POINT:
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_SET);
+		  osDelay(50);
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_RESET);
+		  buzzer_state = BEEP_NONE;
+		  break;
+
+		case BEEP_COIN:
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_SET);
+		  osDelay(50);
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_RESET);
+		  osDelay(50);
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_SET);
+		  osDelay(50);
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_RESET);
+		  buzzer_state = BEEP_NONE;
+		  break;
+
 		case BEEP_DEAD:
-		  // Tiếng bíp dài, nặng nề khi va chạm
 		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_SET);
 		  osDelay(500);
 		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_RESET);
@@ -1276,7 +1291,6 @@ void StartBuzzerTask(void *argument)
 
 		default:
 		case BEEP_NONE:
-		  // Đảm bảo còi tắt và đưa Task vào trạng thái ngủ để giải phóng CPU
 		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_RESET);
 		  osDelay(10);
 		  break;

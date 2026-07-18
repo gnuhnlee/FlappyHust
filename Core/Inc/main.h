@@ -39,10 +39,12 @@ extern "C" {
 /* USER CODE BEGIN ET */
 
 // Định nghĩa các trạng thái âm thanh trong game
-#define BEEP_NONE   0
-#define BEEP_FLAP   1   // Kêu khi chim nhảy lên
-#define BEEP_POINT  2   // Kêu khi ghi được điểm
-#define BEEP_DEAD   3   // Kêu khi đâm vào cột hoặc rơi xuống đất
+#define BEEP_NONE   	0
+#define BEEP_COUNTDOWN	1
+#define BEEP_POINT  	2
+#define BEEP_DEAD   	3
+#define BEEP_START   	4
+#define BEEP_COIN   	5
 
 #ifdef __cplusplus
 extern "C" {
